@@ -5,5 +5,14 @@ import flowbiteReact from "flowbite-react/plugin/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+    // Need path from Tuan
+    // server: {
+    //     proxy: {
+    //         '/api/v1': {
+    //             target: 'http://localhost:3000',
+    //             secure: false,
+    //         }
+    //     }
+    // },
     plugins: [react(), tailwindcss(), flowbiteReact()],
 })

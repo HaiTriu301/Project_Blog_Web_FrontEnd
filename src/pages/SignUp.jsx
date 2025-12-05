@@ -1,7 +1,28 @@
 import {Link} from "react-router-dom";
 import {Button, Label, TextInput} from "flowbite-react";
+import {useState} from "react";
 
 export default function SignUp() {
+    const [formData, setFormData] = useState({})
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.id]: e.target.value});
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Need path from Tuan
+        // try {
+        //     const res = await fetch ('', {
+        //         method: 'POST',
+        //         headers: {'Content-Type': 'application/json'},
+        //         body: JSON.stringify(formData),
+        //     })
+        //     const data = await res.json()
+        // } catch (error) {
+        //
+        // }
+    }
+
     return (
         <div className='min-h-screen mt-20'>
             <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row
@@ -20,32 +41,37 @@ export default function SignUp() {
                 
                 {/*right*/}
                 <div className="flex-1">
-                    <form className='flex flex-col gap-4'>
+                    <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
                         <div>
                             <Label>Your username</Label>
                             <TextInput
                                 type='text'
                                 placeholder='Username'
                                 id='username'
+                                onChange={handleChange}
                             />
                         </div>
                         <div>
                             <Label>Your email</Label>
                             <TextInput
-                                type='text'
+                                type='email'
                                 placeholder='name@company.com'
                                 id='email'
+                                onChange={handleChange}
                             />
                         </div>
                         <div>
                             <Label>Your password</Label>
                             <TextInput
-                                type='text'
+                                type='password'
                                 placeholder='Password'
                                 id='password'
+                                onChange={handleChange}
                             />
                         </div>
-                        <Button gradientduotone='purpleToPink' type='submit'>
+                        <Button className="bg-gradient-to-r from-purple-500 to-pink-500
+                        text-white hover:bg-gradient-to-l focus:ring-purple-200
+                        dark:focus:ring-purple-800" type='submit'>
                             Sign up
                         </Button>
                     </form>
