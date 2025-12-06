@@ -16,7 +16,6 @@ export default function SignUp() {
             return setErrorMessages('Please fill out all fields!');
         }
 
-        // Need path from Tuan
         try {
         setLoading(true);
         setErrorMessages(null)
@@ -27,7 +26,7 @@ export default function SignUp() {
             })
             const data = await res.json()
             if (data.success === false){
-                return setErrorMessages(data.errors)
+                setErrorMessages(data.message)
             }
             setLoading(false)
             if (res.ok){
