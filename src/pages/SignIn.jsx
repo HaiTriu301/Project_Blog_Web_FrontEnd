@@ -1,26 +1,42 @@
-import {Link} from "react-router-dom";
-import {Button, Label, TextInput} from "flowbite-react";
+import {Link, useNavigate} from "react-router-dom";
+import {Alert, Button, Label, Spinner, TextInput} from "flowbite-react";
 import {useState} from "react";
 
 export default function SignIn() {
     const [formData, setFormData] = useState({})
+    const [errorsMessage, setErrorMessages] = useState(null)
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.id]: e.target.value});
+        setFormData({...formData, [e.target.id]: e.target.value.trim()});
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!formData.password || !formData.email) {
+            return setErrorMessages('Please fill out all fields!');
+        }
 
         // Need path from Tuan
-        // try {
-        //     const res = await fetch ('', {
-        //         method: 'POST',
-        //         headers: {'Content-Type': 'application/json'},
-        //         body: JSON.stringify(formData),
-        //     })
-        //     const data = await res.json()
-        // } catch (error) {
-        //
-        // }
+        try {
+            setLoading(true);
+            setErrorMessages(null)
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signin`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData),
+            })
+            const data = await res.json()
+            if (data.success === false){
+                return setErrorMessages(data.errors)
+            }
+            setLoading(false)
+            if (res.ok){
+                navigate('/');
+            }
+        } catch (error) {
+            setErrorMessages(errorsMessage)
+            setLoading(false)
+        }
     }
 
     return (
@@ -35,7 +51,7 @@ export default function SignIn() {
                         Fruit
                     </Link>
                     <p className='text-sm mt-5'>
-                        This is a demo project. You can sign up with your email and password or with Google.
+                        This is a demo project. You can sign in with your email and password or with Google.
                     </p>
                 </div>
 
@@ -43,11 +59,11 @@ export default function SignIn() {
                 <div className="flex-1">
                     <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
                         <div>
-                            <Label>Your username</Label>
+                            <Label>Your email</Label>
                             <TextInput
-                                type='text'
-                                placeholder='Username'
-                                id='username'
+                                type='email'
+                                placeholder='name@company.com'
+                                id='email'
                                 onChange={handleChange}
                             />
                         </div>
@@ -55,23 +71,37 @@ export default function SignIn() {
                             <Label>Your password</Label>
                             <TextInput
                                 type='password'
-                                placeholder='Password'
+                                placeholder='********'
                                 id='password'
                                 onChange={handleChange}
                             />
                         </div>
                         <Button className="bg-gradient-to-r from-purple-500 to-pink-500
                         text-white hover:bg-gradient-to-l focus:ring-purple-200
-                        dark:focus:ring-purple-800" type='submit'>
-                            Sign up
+                        dark:focus:ring-purple-800" type='submit' disabled={loading}>
+                            {
+                                loading ? (
+                                    <>
+                                        <Spinner size='sm'/>
+                                        <span className='pl-3'>Loading...</span>
+                                    </>
+                                ) : 'Sign In'
+                            }
                         </Button>
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
-                        <span>Have an account?</span>
-                        <Link to='/signin' className='text-blue-500'>
-                            Sign in
+                        <span>Don't have an account?</span>
+                        <Link to='/signup' className='text-blue-500'>
+                            Sign Up
                         </Link>
                     </div>
+                    {
+                        errorsMessage && (
+                            <Alert className="mt-5" color="failure">
+                                {errorsMessage}
+                            </Alert>
+                        )
+                    }
                 </div>
             </div>
         </div>
