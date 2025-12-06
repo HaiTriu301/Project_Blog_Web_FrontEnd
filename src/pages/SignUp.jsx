@@ -1,26 +1,42 @@
-import {Link} from "react-router-dom";
-import {Button, Label, TextInput} from "flowbite-react";
+import {Link, useNavigate} from "react-router-dom";
+import {Alert, Button, Label, Spinner, TextInput} from "flowbite-react";
 import {useState} from "react";
 
 export default function SignUp() {
     const [formData, setFormData] = useState({})
+    const [errorsMessage, setErrorMessages] = useState(null)
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.id]: e.target.value});
+        setFormData({...formData, [e.target.id]: e.target.value.trim()});
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!formData.username || !formData.password || !formData.email) {
+            return setErrorMessages('Please fill out all fields!');
+        }
 
         // Need path from Tuan
-        // try {
-        //     const res = await fetch ('', {
-        //         method: 'POST',
-        //         headers: {'Content-Type': 'application/json'},
-        //         body: JSON.stringify(formData),
-        //     })
-        //     const data = await res.json()
-        // } catch (error) {
-        //
-        // }
+        try {
+        setLoading(true);
+        setErrorMessages(null)
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData),
+            })
+            const data = await res.json()
+            if (data.success === false){
+                return setErrorMessages(data.errors)
+            }
+            setLoading(false)
+            if (res.ok){
+                navigate('/signin');
+            }
+        } catch (error) {
+            setErrorMessages(errorsMessage)
+            setLoading(false)
+        }
     }
 
     return (
@@ -71,8 +87,15 @@ export default function SignUp() {
                         </div>
                         <Button className="bg-gradient-to-r from-purple-500 to-pink-500
                         text-white hover:bg-gradient-to-l focus:ring-purple-200
-                        dark:focus:ring-purple-800" type='submit'>
-                            Sign up
+                        dark:focus:ring-purple-800" type='submit' disabled={loading}>
+                            {
+                                loading ? (
+                                    <>
+                                        <Spinner size='sm'/>
+                                        <span className='pl-3'>Loading...</span>
+                                    </>
+                                ) : 'Sign up'
+                            }
                         </Button>
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
@@ -81,6 +104,13 @@ export default function SignUp() {
                             Sign in
                         </Link>
                     </div>
+                    {
+                        errorsMessage && (
+                            <Alert className="mt-5" color="failure">
+                                {errorsMessage}
+                            </Alert>
+                        )
+                    }
                 </div>
             </div>
         </div>
