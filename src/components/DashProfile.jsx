@@ -40,7 +40,7 @@ export default function DashProfile() {
         }
     }, [imageFile]);
 
-    // ⭐ Upload Image to Cloudinary
+    // Upload Image to Cloudinary
     const uploadImageToCloudinary = async () => {
         try {
             setImageFileUploading(true);
