@@ -2,7 +2,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {Alert, Button, Modal, ModalBody, ModalHeader, TextInput} from "flowbite-react";
 import {useEffect, useRef, useState} from "react";
 import 'react-circular-progressbar/dist/styles.css';
-import {updateFailure, updateStart, updateSuccess, deleteUserStart, deleteUserSuccess, deleteUserFailure} from "../redux/user/userSlice.js";
+import {
+    updateFailure, updateStart, updateSuccess, deleteUserStart, deleteUserSuccess, deleteUserFailure,
+    signoutSuccess
+} from "../redux/user/userSlice.js";
 import {HiOutlineExclamationCircle} from "react-icons/hi";
 
 export default function DashProfile() {
@@ -93,10 +96,11 @@ export default function DashProfile() {
         try {
             dispatch(updateStart())
             // Need path from Tuan
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signin`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/update/${currentUser._id}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData),
+                credentials: "include",
             })
             const data = await res.json()
             if (!res.ok) {
@@ -116,8 +120,9 @@ export default function DashProfile() {
         setShowModal(false)
         try{
             dispatch(deleteUserStart())
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signin`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/delete/${currentUser._id}`, {
                 method: 'DELETE',
+                credentials: "include",
             })
             const data = await res.json()
 
@@ -128,6 +133,23 @@ export default function DashProfile() {
             }
         } catch (error) {
             dispatch(deleteUserFailure(error.message))
+        }
+    }
+
+    const handleSignout = async () => {
+        try{
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/signout`, {
+                method: 'POST',
+                credentials: "include",
+            })
+            const data = await res.json()
+            if (!res.ok) {
+                console.log(data.message)
+            } else {
+                dispatch(signoutSuccess())
+            }
+        } catch (error) {
+            console.log(error.message)
         }
     }
 
@@ -153,8 +175,9 @@ export default function DashProfile() {
                     <img
                         src={imageFileUrl || currentUser.profilePicture}
                         alt="user"
-                        className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] $ 
-                        {imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-50'}`}
+                        className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
+                            imageFileUploadProgress && imageFileUploadProgress < 100 ? 'opacity-50' : ''
+                        }`}
                     />
                 </div>
 
@@ -203,7 +226,7 @@ export default function DashProfile() {
 
             <div className="text-red-500 flex justify-between mt-5">
                 <span onClick={() => setShowModal(true)} className="cursor-pointer">Delete Account</span>
-                <span className="cursor-pointer">Sign out</span>
+                <span onClick={handleSignout} className="cursor-pointer">Sign out</span>
             </div>
             {updateUserSuccess && (
                 <Alert color="success" className='mt-5'>{updateUserSuccess}</Alert>

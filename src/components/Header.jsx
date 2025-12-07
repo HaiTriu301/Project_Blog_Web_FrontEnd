@@ -14,13 +14,30 @@ import {AiOutlineSearch} from "react-icons/ai";
 import {FaMoon, FaSun} from "react-icons/fa";
 import {useSelector, useDispatch} from "react-redux";
 import {toggleTheme} from "../redux/theme/themeSlice";
-
+import {signoutSuccess} from "../redux/user/userSlice.js";
 
 export default function Header() {
     const path = useLocation().pathname;
     const dispatch = useDispatch();
     const {currentUser} = useSelector(state => state.user)
     const {theme} = useSelector(state => state.theme)
+
+    const handleSignout = async () => {
+        try{
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/signout`, {
+                method: 'POST',
+                credentials: "include",
+            })
+            const data = await res.json()
+            if (!res.ok) {
+                console.log(data.message)
+            } else {
+                dispatch(signoutSuccess())
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
 
     return (
         <Navbar className='border-b-2'>
@@ -72,7 +89,7 @@ export default function Header() {
                             <DropdownItem>Profile</DropdownItem>
                         </Link>
                         <DropdownDivider />
-                        <DropdownItem onClick>Sign out</DropdownItem>
+                        <DropdownItem onClick={handleSignout}>Sign out</DropdownItem>
                     </Dropdown>
                 ): (
                     <Link to='/signin'>
@@ -82,13 +99,13 @@ export default function Header() {
                     </Link>
                 )}
 
-                <Link to='/signin'>
-                    <Button className="bg-gradient-to-br from-purple-600
-                    to-blue-500 text-white hover:bg-gradient-to-bl
-                    focus:ring-blue-300 dark:focus:ring-blue-800">
-                        Sign in
-                    </Button>
-                </Link>
+                {/*<Link to='/signin'>*/}
+                {/*    <Button className="bg-gradient-to-br from-purple-600*/}
+                {/*    to-blue-500 text-white hover:bg-gradient-to-bl*/}
+                {/*    focus:ring-blue-300 dark:focus:ring-blue-800">*/}
+                {/*        Sign in*/}
+                {/*    </Button>*/}
+                {/*</Link>*/}
 
                 <NavbarToggle/>
             </div>
