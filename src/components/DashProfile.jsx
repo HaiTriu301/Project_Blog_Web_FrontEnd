@@ -233,7 +233,7 @@ export default function DashProfile() {
                             <Button color='red' onClick={handleDeleteUser}>
                                 Yes, I'm sure
                             </Button>
-                            <Button color='gray' onclick={() => setShowModal(false)}>
+                            <Button color="gray" onClick={() => setShowModal(false)}>
                                 No, cancel
                             </Button>
                         </div>
