@@ -1,10 +1,9 @@
 import {Sidebar, SidebarItem, SidebarItemGroup, SidebarItems} from "flowbite-react";
-import {HiArrowSmRight, HiDocumentText, HiUser} from "react-icons/hi";
+import {HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiUser} from "react-icons/hi";
 import {Link, useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {signoutSuccess} from "../redux/user/userSlice";
-import {useDispatch} from "react-redux";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function DashSidebar() {
     const location = useLocation();
@@ -20,7 +19,7 @@ export default function DashSidebar() {
     }, [location.search])
 
     const handleSignout = async () => {
-        try{
+        try {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/signout`, {
                 method: 'POST',
                 credentials: "include",
@@ -60,6 +59,20 @@ export default function DashSidebar() {
                         >
                             Posts
                         </SidebarItem>
+                    )}
+
+                    {currentUser.isAdmin && (
+                        <>
+                            <SidebarItem
+                                as={Link}
+                                to='/dashboard?tab=users'
+                                active={tab === 'users'}
+                                icon={HiOutlineUserGroup}
+                                // as='div'
+                            >
+                                Users
+                            </SidebarItem>
+                        </>
                     )}
 
                     <SidebarItem
