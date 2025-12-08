@@ -153,6 +153,11 @@ export default function Header() {
                 >
                     Projects
                 </NavbarLink>
+                <NavbarLink active={path === '/fotd'} as={'div'}>
+                    <Link to="/fotd">
+                        Food of the Day
+                    </Link>
+                </NavbarLink>
             </NavbarCollapse>
         </Navbar>
     )
