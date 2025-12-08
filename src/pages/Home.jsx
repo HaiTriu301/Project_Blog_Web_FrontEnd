@@ -23,8 +23,13 @@ export default function Home() {
                     Welcome to my Blog Fruit
                 </h1>
                 <p className='text-gray-500 text-xs sm:text-sm'>
-                    Get to know fruits all around the world. You will be
-                    surprised to see how unique and various fruits can be!
+                    Step into the colorful world of BlogFruits, where every
+                    fruit holds a fascinating story and a wealth of nutrition.
+                    We believe that healthy eating shouldn't be boring — it
+                    should be a joyful journey of discovery. From tips on
+                    selecting the perfect fruit to daily menu suggestions,
+                    BlogFruits is your companion for a fresher, more energetic
+                    life.
                 </p>
                 <Link
                     to='/search'
