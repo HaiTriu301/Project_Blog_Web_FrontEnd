@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 export default function DashPosts() {
     const {currentUser} = useSelector(state => state.user)
     const [userPosts, setUserPosts] = useState({});
+    const [showMore, setShowMore] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     console.log(userPosts)
 
     useEffect(() => {
@@ -22,9 +24,9 @@ export default function DashPosts() {
                 const data = await res.json();
                 if (res.ok) {
                     setUserPosts(data.posts);
-                    // if (data.posts.length < 9) {
-                    //     setShowMore(false);
-                    // }
+                    if (data.posts.length < 9) {
+                        setShowMore(false);
+                    }
                 }
             } catch (error) {
                 console.log(error.message);
@@ -34,6 +36,29 @@ export default function DashPosts() {
             fetchPosts();
         }
     }, [currentUser._id]);
+
+    const handleShowMore = async () => {
+        const startIndex = userPosts.length;
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/post/getposts?userId=${
+                    currentUser._id
+                }&startIndex=${startIndex}`,
+                {
+                    credentials: 'include',
+                }
+            );
+            const data = await res.json();
+            if (res.ok) {
+                setUserPosts((prev) => [...prev, ...data.posts]);
+                if (data.posts.length < 9) {
+                    setShowMore(false);
+                }
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     return (
         <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar
@@ -54,7 +79,7 @@ export default function DashPosts() {
                         </TableHead>
                         {userPosts.map((post) => (
                             <TableBody className='divide-y'>
-                                <TableRow className='bg-white dark:bg-gray-700 dark:bg-gray-800'>
+                                <TableRow className='bg-white dark:bg-gray-700'>
                                     <TableCell>
                                         {new Date(post.updatedAt).toLocaleDateString()}
                                     </TableCell>
@@ -99,6 +124,14 @@ export default function DashPosts() {
                             </TableBody>
                         ))}
                     </Table>
+                    {showMore && (
+                        <button
+                            onClick={handleShowMore}
+                            className='w-full text-teal-500 self-center text-sm py-7'
+                        >
+                            Show more
+                        </button>
+                    )}
                 </>
             ) : (
                 <p>You have no posts yet!</p>
