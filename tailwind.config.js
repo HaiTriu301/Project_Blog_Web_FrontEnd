@@ -1,4 +1,5 @@
 import flowbitePlugin from 'flowbite/plugin';
+import lineClamp from '@tailwindcss/line-clamp';
 
 export default {
     content: [
@@ -9,6 +10,6 @@ export default {
     theme: {
         extend: {},
     },
-    plugins: [flowbitePlugin],
+    plugins: [flowbitePlugin, lineClamp,],
 };
 

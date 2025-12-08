@@ -131,7 +131,7 @@ export default function CreatePost() {
                 </div>
 
                 {imageUploadError && (
-                    <Alert color='failure'>
+                    <Alert color='red'>
                         {imageUploadError}
                     </Alert>
                 )}
