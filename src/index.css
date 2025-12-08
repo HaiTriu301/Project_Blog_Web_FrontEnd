@@ -33,6 +33,26 @@ body{
     color: red;
 }
 
+.cb-none {
+    filter: none;
+}
+
+.cb-achromatopsia {
+    filter: url('#achromatopsia');
+}
+
+.cb-protanopia {
+    filter: url('#protanopia');
+}
+
+.cb-deuteranopia {
+    filter: url('#deuteranopia');
+}
+
+.cb-tritanopia {
+    filter: url('#tritanopia');
+}
+
 /*:root {*/
 /*  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;*/
 /*  line-height: 1.5;*/

@@ -9,6 +9,7 @@ import {
 } from 'flowbite-react';
 import {Link} from "react-router-dom";
 import {BsFacebook, BsGithub, BsInstagram, BsTwitter} from "react-icons/bs";
+import ColorBlindSettings from "./ColorBlind.jsx";
 
 export default function FooterCom() {
     return (

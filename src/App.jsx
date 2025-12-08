@@ -16,9 +16,13 @@ import PostPage from "./pages/PostPage.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Search from "./pages/Search.jsx";
 import Fotd from "./pages/FOTD.jsx";
+import {useSelector} from "react-redux";
 
 export default function App() {
+    const { mode } = useSelector((state) => state.colorBlind);
+
     return (
+        <div className={mode}>
         <BrowserRouter>
             <ScrollToTop />
             <Header />
@@ -41,5 +45,6 @@ export default function App() {
             </Routes>
             <Footer />
         </BrowserRouter>
+        </div>
     )
 }

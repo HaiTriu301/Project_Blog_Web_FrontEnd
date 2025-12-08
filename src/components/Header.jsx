@@ -16,6 +16,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {toggleTheme} from "../redux/theme/themeSlice";
 import {signoutSuccess} from "../redux/user/userSlice.js";
 import {useEffect, useState} from "react";
+import ColorBlindSettings from "./ColorBlind.jsx";
 
 export default function Header() {
     const path = useLocation().pathname;
@@ -83,14 +84,7 @@ export default function Header() {
             </Button>
 
             <div className="flex gap-2 md:order-2">
-                <Button className='w-12 h-10 hidden sm:inline'
-                        color='gray'
-                        pill
-                        onClick={() => dispatch(toggleTheme())}
-                >
-                    {theme === 'light' ? <FaSun/> : <FaMoon/>}
-                </Button>
-
+                <ColorBlindSettings />
                 {currentUser ? (
                     <Dropdown
                         arrowIcon={false}
