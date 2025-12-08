@@ -32,10 +32,10 @@ export default function ColorBlindSettings() {
             >
                 <DropdownHeader>
           <span className="block text-sm font-bold text-gray-900 dark:text-white">
-            Chế độ hỗ trợ thị giác
+            Colorblind support mode
           </span>
                     <span className="block truncate text-xs font-normal text-gray-500">
-            Chọn bộ lọc phù hợp với mắt bạn
+            Choose a colorblind mode
           </span>
                 </DropdownHeader>
                 {options.map((option) => (
