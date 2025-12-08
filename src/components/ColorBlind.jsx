@@ -9,11 +9,11 @@ export default function ColorBlindSettings() {
 
 
     const options = [
-        { value: 'cb-none', label: 'Mắt bình thường', desc: 'Màu gốc' },
-        { value: 'cb-achromatopsia', label: 'Mù màu hoàn toàn', desc: 'Trắng đen' },
-        { value: 'cb-protanopia', label: 'Mù màu Đỏ', desc: 'Protanopia' },
-        { value: 'cb-deuteranopia', label: 'Mù màu Xanh lá', desc: 'Deuteranopia' },
-        { value: 'cb-tritanopia', label: 'Mù màu Xanh dương', desc: 'Tritanopia' },
+        { value: 'cb-none', label: 'Normal Vision', desc: 'Default' },
+        { value: 'cb-achromatopsia', label: 'Monochrome', desc: 'High Contrast' },
+        { value: 'cb-protanopia', label: 'Red Blindness', desc: 'Protanopia' },
+        { value: 'cb-deuteranopia', label: 'Green Blindness', desc: 'Deuteranopia' },
+        { value: 'cb-tritanopia', label: 'Blue Blindness', desc: 'Tritanopia' },
     ];
 
     return (

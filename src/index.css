@@ -38,19 +38,19 @@ body{
 }
 
 .cb-achromatopsia {
-    filter: url('#achromatopsia');
+    filter: contrast(175%) brightness(110%);
 }
 
 .cb-protanopia {
-    filter: url('#protanopia');
+    filter: contrast(110%) saturate(130%) hue-rotate(-10deg) brightness(110%);
 }
 
 .cb-deuteranopia {
-    filter: url('#deuteranopia');
+    filter: contrast(110%) saturate(130%) hue-rotate(10deg);
 }
 
 .cb-tritanopia {
-    filter: url('#tritanopia');
+    filter: contrast(120%) saturate(140%) hue-rotate(45deg);
 }
 
 /*:root {*/
