@@ -34,14 +34,6 @@ export default function FooterCom() {
                             <FooterTitle title='About'/>
                             <FooterLinkGroup col>
                                 <FooterLink
-                                    href='https://chatgpt.com/vi-VN/overview/'
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    ChatGPT
-                                </FooterLink>
-
-                                <FooterLink
                                     href='/about'
                                     target='_blank'
                                     rel='noopener noreferrer'
@@ -63,9 +55,11 @@ export default function FooterCom() {
                                 </FooterLink>
 
                                 <FooterLink
-                                    href='#'
+                                    href='https://www.facebook.com/LuNguyenHaiTrieu.3012005/'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
                                 >
-                                    Discord
+                                    Facebook
                                 </FooterLink>
                             </FooterLinkGroup>
                         </div>
