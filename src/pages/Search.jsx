@@ -118,10 +118,15 @@ export default function Search() {
                     <div className="flex items-center gap-2">
                         <label className={"font-semibold"}>Category:</label>
                         <Select onChange={handleChange} value={sidebarData.category} id={"category"}>
-                            <option value={"uncategorized"}>Uncategorized</option>
-                            <option value={"apple"}>Apple</option>
-                            <option value={"orange"}>Orange</option>
-                            <option value={"banana"}>Banana</option>
+                            <option value="Uncategorized">Select a category</option>
+                            <option value="Banana">Banana</option>
+                            <option value="Apple">Apple</option>
+                            <option value="Orange">Orange</option>
+                            <option value="Dragon Fruit">Dragon fruit</option>
+                            <option value="Mango">Mango</option>
+                            <option value="Watermelon">Watermelon</option>
+                            <option value="Strawberry">Strawberry</option>
+                            <option value="Longan">Longan</option>
                         </Select>
                     </div>
                     <Button type={"submit"} outline>
