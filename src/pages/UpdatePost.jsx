@@ -132,15 +132,15 @@ export default function UpdatePost() {
                     <Select onChange={(e) => setFormData({...formData, category: e.target.value})}
                             value={formData.category}
                     >
-                        <option value="uncategorized">Select a category</option>
-                        <option value="banana">Banana</option>
-                        <option value="apple">Apple</option>
-                        <option value="orange">Orange</option>
-                        <option value="dragonFruit">Dragon fruit</option>
-                        <option value="mango">Mango</option>
-                        <option value="watermelon">Watermelon</option>
-                        <option value="strawberry">Strawberry</option>
-                        <option value="longan">Longan</option>
+                        <option value="Uncategorized">Select a category</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Dragon Fruit">Dragon fruit</option>
+                        <option value="Mango">Mango</option>
+                        <option value="Watermelon">Watermelon</option>
+                        <option value="Strawberry">Strawberry</option>
+                        <option value="Longan">Longan</option>
                     </Select>
                 </div>
                 <div className="flex gap-4 items-center justify-between border-4
