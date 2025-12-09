@@ -149,7 +149,7 @@ export default function Header() {
                 </NavbarLink>
                 <NavbarLink active={path === '/fotd'} as={'div'}>
                     <Link to="/fotd">
-                        Food of the Day
+                        Fruit of the Day
                     </Link>
                 </NavbarLink>
             </NavbarCollapse>
