@@ -136,6 +136,11 @@ export default function UpdatePost() {
                         <option value="banana">Banana</option>
                         <option value="apple">Apple</option>
                         <option value="orange">Orange</option>
+                        <option value="dragonFruit">Dragon fruit</option>
+                        <option value="mango">Mango</option>
+                        <option value="watermelon">Watermelon</option>
+                        <option value="strawberry">Strawberry</option>
+                        <option value="longan">Longan</option>
                     </Select>
                 </div>
                 <div className="flex gap-4 items-center justify-between border-4
