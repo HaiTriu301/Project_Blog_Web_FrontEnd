@@ -127,6 +127,7 @@ export default function Search() {
                             <option value="Watermelon">Watermelon</option>
                             <option value="Strawberry">Strawberry</option>
                             <option value="Longan">Longan</option>
+                            <option value="Persimmon">Persimmon</option>
                         </Select>
                     </div>
                     <Button type={"submit"} outline>
