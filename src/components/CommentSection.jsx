@@ -111,7 +111,7 @@ export default function CommentSection({postId}) {
         setShowModal(false);
         try {
             if (!currentUser) {
-                navigate('/sign-in');
+                navigate('/signin');
                 return;
             }
             const res = await fetch(
